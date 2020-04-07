@@ -25,10 +25,10 @@ r = requests.post(urljoin(geoserver_url, endpoint), auth = (user, passwd), heade
 # BC250 está em cartas_e_mapas / bases_cartograficas_continuas / bc250 / versao_2019 / geopackage
 # como inserção é feita via host do docker, a conexão é para o localhost, na porta exposta pelo docker
 PG = 'PG:dbname=gis host=localhost port=25432 user=docker password=docker'
-bc250 = '/home/daniel/geodb/IBGE/bc250_2017-11-08.gpkg'
+bc250 = '/home/daniel/geodb/IBGE/bc250_2019-10-29.gpkg'
 
-subprocess.call(['ogr2ogr', '-t_srs', 'EPSG:4326', '-f', 'PostgreSQL', PG, bc250, 'lim_unidade_federacao_a'])
-subprocess.call(['ogr2ogr', '-t_srs', 'EPSG:4326', '-f', 'PostgreSQL', PG, bc250, 'lim_municipio_a'])
+subprocess.call(['ogr2ogr', '-t_srs', 'EPSG:4326', '-f', 'PostgreSQL', PG, bc250, 'lml_unidade_federacao_a'])
+subprocess.call(['ogr2ogr', '-t_srs', 'EPSG:4326', '-f', 'PostgreSQL', PG, bc250, 'lml_municipio_a'])
 
 #### cria PostGIS stores no GeoServer ####
 # dica - se criarmos alguma coisa na mão do GeoServer e depois entrar no serviço rest
