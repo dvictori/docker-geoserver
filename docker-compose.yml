@@ -1,7 +1,7 @@
 version: '2.1'
 
 volumes:
-   db-backups:
+#   db-backups:
    geoserver-data:
    geo-db-data:
 
@@ -11,7 +11,7 @@ services:
       volumes:
          - geo-db-data:/var/lib/postgresql
       ports:
-        - "25434:5432"
+        - "25432:5432"
       env_file:
       - docker-env/db.env
       restart: on-failure
@@ -19,7 +19,7 @@ services:
         test: "exit 0"
 
    geoserver:
-      image: kartoza/geoserver:2.16.1
+      image: dvictori/geoserver:2.16.2
       volumes:
         - geoserver-data:/opt/geoserver/data_dir
       ports:
@@ -37,13 +37,13 @@ services:
         retries: 3
 
 
-   db-dbbackups:
-     image: kartoza/pg-backup:12.0
-     volumes:
-     - db-backups:/backups
-     env_file:
-     - docker-env/db-backups.env
-     restart: on-failure
-     depends_on:
-       db:
-         condition: service_healthy
+   # db-dbbackups:
+   #   image: kartoza/pg-backup:12.0
+   #   volumes:
+   #   - db-backups:/backups
+   #   env_file:
+   #   - docker-env/db-backups.env
+   #   restart: on-failure
+   #   depends_on:
+   #     db:
+   #       condition: service_healthy
